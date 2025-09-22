@@ -1,6 +1,6 @@
 # esphome-pm5000s
 external_components:
-  - source: github://Lafayette2958/esphome-pm5000s@main
+  - source: github://Lafayette2958/esphome-pm5000s
     components: [pm5000s]
 
 i2c:
