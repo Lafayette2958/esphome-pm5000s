@@ -1,7 +1,7 @@
 # esphome-pm5000s
-
-
-captive_portal:
+external_components:
+  - source: github://Lafayette2958/esphome-pm5000s
+    components: [ pm5000s]
 
 i2c:
   sda: GPIO21     
@@ -10,53 +10,21 @@ i2c:
   frequency: 100kHz
   id: bus_i2c  
 
-uart:
-
-  id: uart_2     # uart_bus
-  tx_pin: GPIO17   
-  rx_pin: GPIO16     
-  baud_rate: 9600
-  stop_bits: 1
-  data_bits: 8
-  parity: NONE
-  #flow_rate: NONE  
-
 sensor:
-  - platform: custom
-    lambda: |-
-      auto gasboard = new Gasboard7500OPCSensor(id(uart_2));
-      App.register_component(gasboard);
-      return  { gasboard->gas_flow, gasboard->gas_temperature };
-      
-    sensors:
-      - name: "Gas Flow"
-        unit_of_measurement: "L/min"
-        accuracy_decimals: 2
-      - name: "Gas Temperature"
-        unit_of_measurement: "°C"
-        accuracy_decimals: 1    
+  - platform: pm5000s
+    i2c_id: bus_i2c
+    address: 0x28
+    update_interval: 10s
+    particles_03um:
+      name: "Particles >0.3µm"
+    particles_05um:
+      name: "Particles >0.5µm"
+    particles_10um:
+      name: "Particles >1.0µm"
+    particles_25um:
+      name: "Particles >2.5µm"
+    particles_50um:
+      name: "Particles >5.0µm"
+    particles_100um:
+      name: "Particles >10.0µm"
 
-  - platform: custom
-    lambda: |-
-      auto pm5000s = new PM5000SSensor(0x28, id(bus_i2c));
-      App.register_component(pm5000s);
-      return {pm5000s->particles_03um, pm5000s->particles_05um, pm5000s->particles_10um, pm5000s->particles_25um, pm5000s->particles_50um, pm5000s->particles_100um};
-    sensors:
-      - name: "Particles >0.3µm"
-        unit_of_measurement: "pcs/L"
-        accuracy_decimals: 2
-      - name: "Particles >0.5µm"
-        unit_of_measurement: "pcs/L"
-        accuracy_decimals: 2
-      - name: "Particles >1.0µm"
-        unit_of_measurement: "pcs/L"
-        accuracy_decimals: 2
-      - name: "Particles >2.5µm"
-        unit_of_measurement: "pcs/L"
-        accuracy_decimals: 2
-      - name: "Particles >5.0µm"
-        unit_of_measurement: "pcs/L"
-        accuracy_decimals: 2
-      - name: "Particles >10.0µm"
-        unit_of_measurement: "pcs/L"  
-        accuracy_decimals: 2
