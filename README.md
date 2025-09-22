@@ -1,7 +1,7 @@
 # esphome-pm5000s
 external_components:
-  - source: github://Lafayette2958/esphome-pm2x05@master
-    components: [ pm5000s]
+  - source: github://Lafayette2958/esphome-pm5000s
+    components: [pm5000s]
 
 i2c:
   sda: GPIO21     
