@@ -4,7 +4,7 @@ from esphome.components import i2c, sensor
 from esphome.const import (
     CONF_ID,
     ICON_CHEMICAL_WEAPON,
-    DEVICE_CLASS_EMPTY,  # No specific device class for particle count
+    DEVICE_CLASS_EMPTY,
 )
 
 DEPENDENCIES = ["i2c"]
@@ -43,7 +43,7 @@ CONFIG_SCHEMA = (
             },
         }
     )
-    .extend(i2c.i2c_device_schema(default_address=0x28))  
+    .extend(i2c.i2c_device_schema(default_address=0x28))   
     .extend(cv.polling_component_schema("5s"))
 )
 
