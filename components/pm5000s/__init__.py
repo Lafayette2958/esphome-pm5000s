@@ -22,7 +22,7 @@ CONFIG_SCHEMA = (
             cv.Optional(CONF_ADDRESS, default=0x28): cv.uint8_t,
         }
     )
-    .extend(i2c.i2c_device_schema)
+    .extend(i2c.i2c_device_schema())  
     .extend(cv.polling_component_schema("5s"))
 )
 
