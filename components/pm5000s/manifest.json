@@ -1,8 +1,7 @@
 
 {
-  "domain": "pm5000s",
   "name": "PM5000S Sensor",
-  "dependencies": ["i2c"],
-  "codeowners": ["@Lafayette"],
-  "version": "1.0.0"
+  "domain": "pm5000s",
+  "version": "1.0.0",
+  "dependencies": ["i2c"]
 }
