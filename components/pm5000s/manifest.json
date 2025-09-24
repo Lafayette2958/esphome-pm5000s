@@ -1,0 +1,7 @@
+{
+  "domain": "pm5000s",
+  "name": "PM5000S Air Sensor",
+  "dependencies": ["i2c"],
+  "codeowners": ["@Lafayette"],
+  "version": "1.0.0"
+}
