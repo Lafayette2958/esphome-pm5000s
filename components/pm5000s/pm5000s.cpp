@@ -15,7 +15,7 @@ void PM5000SSensor::setup() {
     ESP_LOGW(TAG, "Failed to send start measurement command");
   }
 
-  App.delay(1000);  // Use App.delay() instead of delay()
+ // App.delay(1000);  // Use App.delay() instead of delay()
 }
 
 void PM5000SSensor::update() {
