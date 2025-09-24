@@ -9,7 +9,7 @@ namespace pm5000s {
 
 class PM5000SSensor : public PollingComponent, public i2c::I2CDevice {
  public:
-  // Sensor pointers, not new instances
+  // Sensor pointers (not new instances)
   sensor::Sensor *particles_03um{nullptr};
   sensor::Sensor *particles_05um{nullptr};
   sensor::Sensor *particles_10um{nullptr};
@@ -17,12 +17,14 @@ class PM5000SSensor : public PollingComponent, public i2c::I2CDevice {
   sensor::Sensor *particles_50um{nullptr};
   sensor::Sensor *particles_100um{nullptr};
 
-  PM5000SSensor(uint8_t address = 0x28) : PollingComponent(10000), i2c::I2CDevice(address) {}
+  PM5000SSensor(uint8_t address = 0x28) : PollingComponent(10000) {
+    this->set_i2c_address(address);
+  }
 
   void setup() override;
   void update() override;
 
-  // Setters for each particle size
+  // Setters for each particle size sensor
   void set_particles_03um_sensor(sensor::Sensor *sensor) { this->particles_03um = sensor; }
   void set_particles_05um_sensor(sensor::Sensor *sensor) { this->particles_05um = sensor; }
   void set_particles_10um_sensor(sensor::Sensor *sensor) { this->particles_10um = sensor; }
