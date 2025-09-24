@@ -1,17 +1,18 @@
-from esphome.components import sensor
-import esphome.config_validation as cv
 import esphome.codegen as cg
-from esphome.const import CONF_ID
+import esphome.config_validation as cv
+from esphome.components import i2c, sensor
+from esphome.const import CONF_ID, CONF_ADDRESS
 
 from . import (
     PM5000SSensor,
     SENSOR_KEYS,
-    CONF_ADDRESS,
     UNIT_PARTICLES_PER_LITER,
-    pm5000s_ns,
 )
 
-CONFIG_SCHEMA = cv.All(
+DEPENDENCIES = ["i2c"]
+AUTO_LOAD = ["i2c"]
+
+CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(PM5000SSensor),
@@ -26,13 +27,14 @@ CONFIG_SCHEMA = cv.All(
             },
         }
     )
+    .extend(i2c.i2c_device_schema(default_address=0x28))
     .extend(cv.polling_component_schema("10s"))
-    .extend(cv.requires_component("i2c"))
 )
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID], config[CONF_ADDRESS])
     await cg.register_component(var, config)
+    await i2c.register_i2c_device(var, config)
 
     for key, setter in SENSOR_KEYS.items():
         if key in config:
