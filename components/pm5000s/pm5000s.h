@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "esphome/core/component.h"
@@ -16,7 +17,7 @@ class PM5000SSensor : public PollingComponent, public i2c::I2CDevice {
   sensor::Sensor *particles_50um{nullptr};
   sensor::Sensor *particles_100um{nullptr};
 
-  // Constructor: default-construct I2CDevice, then set address manually
+  // Fix: Default-construct I2CDevice, then set address manually
   explicit PM5000SSensor(uint8_t address = 0x28) : PollingComponent(10000), i2c::I2CDevice() {
     this->set_i2c_address(address);
   }
