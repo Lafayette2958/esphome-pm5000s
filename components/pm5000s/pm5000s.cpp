@@ -1,6 +1,6 @@
 #include "pm5000s.h"
 #include "esphome/core/log.h"
-#include "esphome/core/application.h"  // Needed for App.delay()
+//#include "esphome/core/application.h" 
 
 namespace esphome {
 namespace pm5000s {
