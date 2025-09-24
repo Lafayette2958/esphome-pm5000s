@@ -14,9 +14,7 @@ void PM5000SSensor::setup() {
   } else {
     ESP_LOGW(TAG, "Failed to send start measurement command");
   }
-
 }
-
 void PM5000SSensor::update() {
   uint8_t data[32] = {0};
   if (!this->read_bytes(0x51, data, sizeof(data))) {
